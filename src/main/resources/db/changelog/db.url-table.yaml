@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+     id:  0
+     author:  tharwat
+     changes:
+       -  createTable:
+            tableName:  url
+            schemaName:  shortened
+            columns:
+              -  column:
+                   name:  id
+                   type:  int
+                   autoIncrement:  true
+                   constraints:
+                     primaryKey:  true
+                     nullable:  false
+              -  column:
+                   name:  source_url
+                   type:  varchar(300)
+                   constraints:
+                     nullable: false
+              - column:
+                  name: short_url
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: key
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 1
+      author: tharwat
+      changes:
+        - createIndex:
+            clustered: true
+            columns:
+              - column:
+                  name: key
+            indexName: idx_url_key
+            schemaName: shortened
+            tableName: url
