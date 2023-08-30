@@ -4,9 +4,11 @@ import com.absquare.shortened.api.dto.ShortenedUrl;
 import com.absquare.shortened.api.dto.UrlShortenRequest;
 import com.absquare.shortened.service.UrlService;
 import com.absquare.shortened.service.UrlServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +28,7 @@ public class UrlController {
     }
 
     @PostMapping("/shorten")
-    ResponseEntity<ShortenedUrl> shortenUrl(@RequestBody UrlShortenRequest request) {
+    ResponseEntity<ShortenedUrl> shortenUrl(@RequestBody @Valid UrlShortenRequest request) {
         urlService.shortenUrl("String");
         return ResponseEntity
                 .status(HttpStatus.CREATED)

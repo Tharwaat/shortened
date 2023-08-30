@@ -1,3 +1,9 @@
+server:
+  shutdown: graceful
+  error:
+    include-message: always
+    include-binding-errors: always
+
 spring:
   jpa:
     hibernate:
