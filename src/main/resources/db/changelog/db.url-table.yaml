@@ -9,14 +9,14 @@ databaseChangeLog:
             columns:
               -  column:
                    name:  id
-                   type:  int
+                   type: bigint
                    autoIncrement:  true
                    constraints:
                      primaryKey:  true
                      nullable:  false
               -  column:
                    name:  source_url
-                   type:  varchar(300)
+                   type:  varchar(2048)
                    constraints:
                      nullable: false
               - column:
@@ -25,7 +25,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: key
+                  name: hash_value
                   type: varchar(50)
                   constraints:
                     nullable: false
@@ -37,7 +37,7 @@ databaseChangeLog:
             clustered: true
             columns:
               - column:
-                  name: key
-            indexName: idx_url_key
+                  name: hash_value
+            indexName: idx_url_hash_value
             schemaName: shortened
             tableName: url

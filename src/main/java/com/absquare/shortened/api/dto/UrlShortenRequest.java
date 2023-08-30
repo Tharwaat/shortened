@@ -7,7 +7,6 @@ import lombok.*;
 import org.hibernate.validator.constraints.URL;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class UrlShortenRequest {
