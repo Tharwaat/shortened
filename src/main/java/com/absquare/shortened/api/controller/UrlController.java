@@ -6,6 +6,7 @@ import com.absquare.shortened.service.UrlService;
 import com.absquare.shortened.service.UrlServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +27,8 @@ public class UrlController {
         this.urlService = urlService;
     }
 
-    @PostMapping("/shorten")
-    ResponseEntity<ShortenedUrl> shortenUrl(@RequestBody @Valid UrlShortenRequest request) throws UnknownHostException {
+    @PostMapping(value = "/shorten")
+    public ResponseEntity<ShortenedUrl> shortenUrl(@RequestBody @Valid UrlShortenRequest request) throws UnknownHostException {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(urlService.shortenUrl(request.getUrl()));
