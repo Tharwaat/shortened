@@ -29,4 +29,4 @@ spring:
 
 
 host:
-  name: localhost
+  name: http://localhost
