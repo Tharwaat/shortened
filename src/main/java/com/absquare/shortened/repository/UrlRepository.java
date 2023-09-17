@@ -17,4 +17,6 @@ public interface UrlRepository extends JpaRepository<URL, Long> {
     }
 
     Optional<URL> findByHashValue(String hashValue);
+
+    void deleteByHashValue(String hashValue);
 }

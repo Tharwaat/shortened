@@ -8,4 +8,5 @@ import java.net.UnknownHostException;
 public interface UrlService {
     ShortenedUrl shortenUrl(String sourceUrl) throws UnknownHostException;
     ShortenedUrl getSourceURL(String hashValue) throws ResourceNotFoundException;
+    void deleteShortURL(String hashValue) throws ResourceNotFoundException;
 }

@@ -7,12 +7,15 @@ import com.absquare.shortened.mapper.UrlMapper;
 import com.absquare.shortened.model.url.URL;
 import com.absquare.shortened.repository.UrlRepository;
 import jakarta.servlet.http.HttpServlet;
+import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @Service
 public class UrlServiceImpl implements UrlService {
 
@@ -61,5 +64,14 @@ public class UrlServiceImpl implements UrlService {
 
         cachingService.set(SHORT_URL_CACHE_NAME, hashValue, foundURL, 5, TimeUnit.MINUTES);
         return foundURL;
+    }
+
+    @Transactional
+    @Override
+    public void deleteShortURL(String hashValue) throws ResourceNotFoundException {
+        cachingService.delete(SHORT_URL_CACHE_NAME, hashValue);
+        URL foundURL = urlRepository.findByHashValue(hashValue)
+                .orElseThrow(() -> new ResourceNotFoundException(hashValue));
+        urlRepository.deleteById(foundURL.getId());
     }
 }

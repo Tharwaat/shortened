@@ -20,7 +20,11 @@ public class RedisService implements CachingService{
 
     public ShortenedUrl get(String cacheName, String key) {
         return redisTemplate.opsForValue().get(cacheName + key);
-    } 
+    }
+
+    public void delete(String cacheName, String key) {
+        redisTemplate.delete(cacheName + key);
+    }
  
     public Boolean hasKey(String cacheName, String key) { 
         return redisTemplate.hasKey(cacheName + key);
